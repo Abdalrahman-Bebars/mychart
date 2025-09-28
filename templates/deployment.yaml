@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mychart-deployment
+  labels:
+{{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value }}
+{{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+{{- range $key, $value := .Values.labels }}
+      {{ $key }}: {{ $value }}
+{{- end }}
+  template:
+    metadata:
+      labels:
+{{- range $key, $value := .Values.labels }}
+        {{ $key }}: {{ $value }}
+{{- end }}
+    spec:
+      containers:
+        - name: nginx
+          image: "nginx:stable"
+          imagePullPolicy: IfNotPresent
+          {{- include "mychart.containerResources" . | nindent 10 }}

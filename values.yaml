@@ -1,0 +1,12 @@
+replicaCount: 1
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+
+image:
+  repository: nginx # Default repo
+  # We'll determine tag based on isProduction
+  isProduction: false # Flag for prod/dev
+
