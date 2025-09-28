@@ -1,25 +1,27 @@
 # MyChart Helm Chart
 
-## Lab: Named Templates (Helm Helpers)
+## Lab: Using Named Templates (Helpers) in Helm
 
-This chart demonstrates **Helm named templates** and reusable YAML blocks (`_helpers.tpl`).
-It defines container resource settings, includes them in a Deployment, and tests default vs. override values.
+This chart demonstrates how to use **Helm named templates** (`_helpers.tpl`) to define reusable YAML blocks.
+It focuses on container resource settings, showing how to apply defaults and override values.
 
 ---
 
 ## 🚀 Setup
 
-1. Go into your chart directory:
+1. Navigate to your chart directory:
 
    ```bash
    cd mychart
    ```
+
 2. Create the helpers file:
 
    ```bash
    touch templates/_helpers.tpl
    ```
-3. In `values.yaml`, add default resources:
+
+3. Add default values to `values.yaml`:
 
    ```yaml
    replicaCount: 1
@@ -35,7 +37,7 @@ It defines container resource settings, includes them in a Deployment, and tests
 
 ---
 
-## 🔹 Step 1: Define the Named Template
+## 🔹 Step 1: Define a Named Template
 
 In `templates/_helpers.tpl`:
 
@@ -55,9 +57,9 @@ resources:
 
 ---
 
-## 🔹 Step 2: Include Template in Deployment
+## 🔹 Step 2: Use Template in Deployment
 
-In `templates/deployment.yaml`, under the container spec:
+Inside `templates/deployment.yaml`:
 
 ```yaml
 containers:
@@ -71,13 +73,13 @@ containers:
 
 ## 🔹 Step 3: Test Defaults
 
-Run:
+Render the chart:
 
 ```bash
 helm template mychart .
 ```
 
-Expected snippet in Deployment:
+Expected Deployment snippet:
 
 ```yaml
 resources:
@@ -105,7 +107,7 @@ Run:
 helm template mychart . -f override-resources.yaml
 ```
 
-Expected snippet:
+Expected output:
 
 ```yaml
 resources:
@@ -118,13 +120,13 @@ resources:
 
 ---
 
-## 📦 Chart Files
+## 📦 Files in the Chart
 
-* `Chart.yaml` — chart metadata
-* `values.yaml` — default configuration
-* `templates/_helpers.tpl` — reusable named templates
-* `templates/deployment.yaml` — Deployment manifest using the helper
+* **Chart.yaml** — chart metadata
+* **values.yaml** — default configuration
+* **templates/_helpers.tpl** — reusable named templates
+* **templates/deployment.yaml** — Deployment using the helper
 
 ---
 
-✅ With this lab you can practice creating, including, and testing Helm named templates with defaults and overrides.
+✅ This lab walks you through defining helpers, including them in manifests, and testing with both default and overridden values.
